@@ -121,7 +121,8 @@ function getLearnerData(course, ag, submissions) {
         // console.log(assignment)
         sum_total += assignment.points_possible;
         avg = sum_score / sum_total;
-        learner_info[submit[0]] = submit[2] / assignment.points_possible;
+        avg = avg.toFixed(2);  // to have exactly two decimal digits 
+        learner_info[submit[0]] = (submit[2] / assignment.points_possible).toFixed(2);
     }
     learner_info['avg'] = avg;
     console.log(sum_score, sum_total, avg);
