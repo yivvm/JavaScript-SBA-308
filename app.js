@@ -79,18 +79,6 @@ const LearnerSubmissions = [
 function getLearnerData(course, ag, submissions) {
   const results = [];
 
-  learners = {};
-  submissions.forEach((submit) => {
-    if (!(submit.learner_id in learners)) {
-        learners[submit.learner_id] = [[submit.assignment_id, submit.submission.submitted_at, submit.submission.score]]
-    } else {
-        learners[submit.learner_id].push([submit.assignment_id, submit.submission.submitted_at, submit.submission.score])
-    }
-  })
-
-  console.log(learners)
-
-
   // Parse submission data.
 //   console.log(`Submission Data:`, submissions );
   // Check to see if the submission was late; if so, deduct 10% of the maximum possible points.
@@ -99,6 +87,46 @@ function getLearnerData(course, ag, submissions) {
   // Calculate the average score for each learner and remove the extra data.
 
   //==== PUT CODE HERE =====//
+
+  //   create a list of learners with a list of submission information
+  const learners = {};
+  submissions.forEach((submit) => {
+    if (!(submit.learner_id in learners)) {
+        learners[submit.learner_id] = [[submit.assignment_id, submit.submission.submitted_at, submit.submission.score]]
+    } else {
+        learners[submit.learner_id].push([submit.assignment_id, submit.submission.submitted_at, submit.submission.score])
+    }
+  })
+
+  console.log(learners);
+
+//   create a list of learners' id
+  const learners_id = Object.keys(learners);
+  console.log(learners_id);
+
+//   create the result list of objects/learners
+  const learners_avg =[];
+  learners_id.forEach((id) => {
+    console.log(learners[id])
+    const all_submits = learners[id];
+
+    // get the average for each learner
+    let sum_score = 0;
+    let sum_total = 0;
+    let avg;
+    for (const submit of all_submits) {  // 
+        sum_score += submit[2];
+        const assignment =  ag.assignments.find(a => a.id === submit[0])
+        // console.log(assignment)
+        sum_total += assignment.points_possible;
+        avg = sum_score / sum_total;
+    }
+    console.log(sum_score, sum_total, avg);
+  })
+
+
+//   console.log(learners_avg);
+  
   return results;
 }
 
