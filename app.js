@@ -114,14 +114,18 @@ function getLearnerData(course, ag, submissions) {
     let sum_score = 0;
     let sum_total = 0;
     let avg;
+    let learner_info = { 'id': id};
     for (const submit of all_submits) {  // 
         sum_score += submit[2];
         const assignment =  ag.assignments.find(a => a.id === submit[0])
         // console.log(assignment)
         sum_total += assignment.points_possible;
         avg = sum_score / sum_total;
+        learner_info[submit[0]] = submit[2] / assignment.points_possible;
     }
+    learner_info['avg'] = avg;
     console.log(sum_score, sum_total, avg);
+    console.log(learner_info);
   })
 
 
