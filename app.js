@@ -121,26 +121,33 @@ function getLearnerData(course, ag, submissions) {
     console.log(learners[id]);
     const all_submits = learners[id];
 
+    // for final output and the format: the ID of the learner for which this data has been collected
+    let learner_info = { id: id };
+
     // get the average for each learner
     let sum_score = 0;
     let sum_total = 0;
     let avg;
-    // for final output and the format: the ID of the learner for which this data has been collected
-    let learner_info = { id: id };
     for (const submit of all_submits) {
-      sum_score += submit[2];
       const assignment = ag.assignments.find((a) => a.id === submit[0]);
       // console.log(assignment)
-      sum_total += assignment.points_possible;
-      avg = sum_score / sum_total;
-      avg = avg.toFixed(2); // to have exactly two decimal digits
-      // for final output and the format: the learner's weighted average score
-      learner_info["avg"] = avg;
 
-      // for final output and the format: each assignment: submission.score / points_possible
-      learner_info[submit[0]] = (
-        submit[2] / assignment.points_possible
-      ).toFixed(2);
+      // if an assignment is not yet due, do not include it in the results
+      if (assignment.due_at < '2024-02-16') {
+        sum_score += submit[2];
+        sum_total += assignment.points_possible;
+        avg = sum_score / sum_total;
+        avg = avg.toFixed(3); // to have exactly three decimal digits
+        // for final output and the format: the learner's weighted average score
+        learner_info["avg"] = avg;
+
+        // for final output and the format: each assignment: submission.score / points_possible
+        learner_info[submit[0]] = (
+          submit[2] / assignment.points_possible
+        ).toFixed(3);
+      }
+
+      
     }
     
     console.log(sum_score, sum_total, avg);
