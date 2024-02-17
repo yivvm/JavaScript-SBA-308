@@ -81,7 +81,7 @@ function getLearnerData(course, ag, submissions) {
   const results = [];
 
   // done: Parse submission data.
-  //   console.log(`Submission Data:`, submissions );
+    console.log(`Submission Data:`, submissions );
   // done: Check to see if the submission was late; if so, deduct 10% of the maximum possible points.
   // Find existing data for this learner, if any.
   // If the learner already has data, add the new score to the existing data.
@@ -180,6 +180,7 @@ function validateAssignmentGroup(course, ag, submissions) {
     if (assignment.points_possible === 0) {
       throw new Error("Error: the points_possible cannot be 0.")
     }
+    // if a value is a string instead of a number, throw an error.
     if (typeof(assignment.points_possible) === 'string') {
       throw new Error("Error: the points_possible should be a number.")
     } 
