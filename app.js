@@ -80,9 +80,9 @@ const LearnerSubmissions = [
 function getLearnerData(course, ag, submissions) {
   const results = [];
 
-  // Parse submission data.
+  // done: Parse submission data.
   //   console.log(`Submission Data:`, submissions );
-  // Check to see if the submission was late; if so, deduct 10% of the maximum possible points.
+  // done: Check to see if the submission was late; if so, deduct 10% of the maximum possible points.
   // Find existing data for this learner, if any.
   // If the learner already has data, add the new score to the existing data.
   // Calculate the average score for each learner and remove the extra data.
@@ -160,7 +160,7 @@ function getLearnerData(course, ag, submissions) {
     // console.log(sum_score, sum_total, avg);
     // console.log(learner_info);
 
-    // append each learner's information to the results list as the final output
+    // for final output and the format: append each learner's information to the results list as the final output
     results.push(learner_info);
   });
 
