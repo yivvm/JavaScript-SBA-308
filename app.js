@@ -21,7 +21,7 @@ const AssignmentGroup = {
       id: 2,
       name: "Write a Function",
       due_at: "2023-02-27",
-      points_possible: 0,
+      points_possible: 150,
     },
     {
       id: 3,
@@ -180,16 +180,26 @@ function validateAssignmentGroup(course, ag, submissions) {
     if (assignment.points_possible === 0) {
       throw new Error("Error: the points_possible cannot be 0.")
     }
+    if (typeof(assignment.points_possible) === 'string') {
+      throw new Error("Error: the points_possible should be a number.")
+    } 
   })
 
   // if a value is a string instead of a number, throw an error.
-  // if (isNaN(ag.assignments.points_possible) || isNaN(submissions.score)) {
-  //   throw new Error("Error: the points_possible and the score should be a number.")
+  // for (let i = 0; i < submissions.length; i++) {
+  //   if (typeof(submissions[i].submission.score) === 'string') {
+  //     throw new Error("Error: the points_possible and the score should be a number.")
+  //   }
   // }
+  submissions.forEach((submit) => {
+    if (typeof(submit.submission.score) === 'string') {
+      throw new Error("Error: the score should be a number.")
+    }
+  })
 }
 
 try {
-  validateAssignmentGroup(CourseInfo, AssignmentGroup);
+  validateAssignmentGroup(CourseInfo, AssignmentGroup, LearnerSubmissions);
   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   console.log(result);
 } catch (error) {
@@ -197,6 +207,12 @@ try {
   return null;
 }
 
+
+// --- for testing----------------------
+// for (let i = 0; i < LearnerSubmissions.length; i++)  {
+//   console.log(typeof(LearnerSubmissions[i].submission.score))
+  
+// }
 
 
 
