@@ -76,6 +76,7 @@ const LearnerSubmissions = [
   },
 ];
 
+
 function getLearnerData(course, ag, submissions) {
   const results = [];
 
@@ -166,9 +167,24 @@ function getLearnerData(course, ag, submissions) {
   return results;
 }
 
-const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
-console.log(result);
+// If an AssignmentGroup does not belong to its course, throw an error.
+function validateAssignmentGroup(course, ag) {
+  if (ag.course_id !== course.id) {
+    throw new Error("Error: the input was invalid, as the AssignmentGroup does not belong to its course.")
+  }
+}
+
+try {
+  validateAssignmentGroup(CourseInfo, AssignmentGroup);
+  const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+  console.log(result);
+} catch (error) {
+  console.log(error.message);
+}
+
+
+
 
 // --- FYI ----------------
 // const example_result = [
