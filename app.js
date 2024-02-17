@@ -108,17 +108,15 @@ function getLearnerData(course, ag, submissions) {
     }
   });
 
-  console.log(learners);
+  // console.log(learners);
 
   // 2. create a list of learners' id
   const learners_id = Object.keys(learners);
-  console.log(learners_id);
+  // console.log(learners_id);
 
-  // 3. create the result list of objects/learners
-  const learners_avg = [];
-  // for each learner
+  // 3. for each learner, create the result list of objects in the format as requested: {id:'123', avg:0.98, 1:0.98, 2:1.0}
   learners_id.forEach((id) => {
-    console.log(learners[id]);
+    // console.log(learners[id]);
     const all_submits = learners[id];
 
     // for final output and the format: the ID of the learner for which this data has been collected
@@ -155,16 +153,16 @@ function getLearnerData(course, ag, submissions) {
       }
     }
     
-    console.log(sum_score, sum_total, avg);
-    console.log(learner_info);
-  });
+    // console.log(sum_score, sum_total, avg);
+    // console.log(learner_info);
 
-    // console.log(learners_avg);
+    // append each learner's information to the results list as the final output
+    results.push(learner_info);
+  });
 
   return results;
 }
 
-console.log(getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions))
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
