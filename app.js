@@ -134,7 +134,14 @@ function getLearnerData(course, ag, submissions) {
 
       // if an assignment is not yet due, do not include it in the results
       if (assignment.due_at < '2024-02-16') {
-        sum_score += submit[2];
+        let actual_score = submit[2];
+        
+        // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
+        if (submit[1] > assignment.due_at) {
+          actual_score -= assignment.points_possible * 0.1;
+        } 
+        
+        sum_score += actual_score;
         sum_total += assignment.points_possible;
         avg = sum_score / sum_total;
         avg = avg.toFixed(3); // to have exactly three decimal digits
@@ -143,11 +150,9 @@ function getLearnerData(course, ag, submissions) {
 
         // for final output and the format: each assignment: submission.score / points_possible
         learner_info[submit[0]] = (
-          submit[2] / assignment.points_possible
+          actual_score / assignment.points_possible
         ).toFixed(3);
       }
-
-      
     }
     
     console.log(sum_score, sum_total, avg);
