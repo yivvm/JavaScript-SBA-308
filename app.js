@@ -21,7 +21,7 @@ const AssignmentGroup = {
       id: 2,
       name: "Write a Function",
       due_at: "2023-02-27",
-      points_possible: 150,
+      points_possible: 0,
     },
     {
       id: 3,
@@ -168,11 +168,24 @@ function getLearnerData(course, ag, submissions) {
 }
 
 
-// If an AssignmentGroup does not belong to its course, throw an error.
-function validateAssignmentGroup(course, ag) {
+// check the validation of the input data
+function validateAssignmentGroup(course, ag, submissions) {
+  // if an AssignmentGroup does not belong to its course, throw an error.
   if (ag.course_id !== course.id) {
-    throw new Error("Error: the input was invalid, as the AssignmentGroup does not belong to its course.")
+    throw new Error("Error: the AssignmentGroup does not belong to its course.")
   }
+
+  // if points_possible is 0, throw an error.
+  ag.assignments.forEach((assignment) => {
+    if (assignment.points_possible === 0) {
+      throw new Error("Error: the points_possible cannot be 0.")
+    }
+  })
+
+  // if a value is a string instead of a number, throw an error.
+  // if (isNaN(ag.assignments.points_possible) || isNaN(submissions.score)) {
+  //   throw new Error("Error: the points_possible and the score should be a number.")
+  // }
 }
 
 try {
@@ -181,6 +194,7 @@ try {
   console.log(result);
 } catch (error) {
   console.log(error.message);
+  return null;
 }
 
 
