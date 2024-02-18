@@ -132,7 +132,7 @@ function getLearnerData(course, ag, submissions) {
           let sum_score = actual_score;
           let sum_total = assignment.points_possible;
 
-          // update the avg
+          // update the avg, and remove the previous avg
           for (const key in learner_info) {
             const prev_assignment = ag.assignments.find((a) => a.id === Number(key));
             if (prev_assignment) {
@@ -142,7 +142,7 @@ function getLearnerData(course, ag, submissions) {
           }
           learner_info['avg'] = Number((sum_score / sum_total).toFixed(3));
 
-          // add new assignment_id and its weight to learner_info
+          // add new assignment_id and its percentage to learner_info
           learner_info[Number(assignment.id)] = Number((actual_score / assignment.points_possible).toFixed(3));
 
           // console.log(learner_info)
@@ -153,7 +153,7 @@ function getLearnerData(course, ag, submissions) {
   return results;
 }
 
-// 4. check the validation of the input data
+// 5. check the validation of the input data
 function validateAssignmentGroup(course, ag, submissions) {
   // if an AssignmentGroup does not belong to its course, throw an error.
   if (ag.course_id !== course.id) {

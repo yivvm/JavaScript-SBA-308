@@ -56,3 +56,19 @@ It returns the same ```results``` as the ```solution-1-v1.js```.
 ![results](./results.png)
 Tested ```try/catch```:  
 ![trycatch](./trycatch.png)
+
+## solution-2.js
+Update the results for each assignment submission.
+1. Check if an assignment is not yet due, do not include it in the results.   
+    - Utilized at least one loop control keyword such as break or continue.
+2. Check if there's any existing data for this learner, which will show in the ```learner_info```.
+3. If there's no exisiting data for this learner in the results, the ```learner_info``` is ```undefined```. 
+    - Then, initiate the ```learner_info``` for this learner. 
+    - Add the `avg` and the percentage (submission.score / points_possible) of this assignment to this ```learner_info```. 
+    - Push the ```learner_info``` into ```results```. 
+4. If there's no exisiting data for this learner in the results, update this ```learner_info```. 
+    - Iterate the previous assignment and get previous assignment score by its percentage * points_possible. 
+    - Update the ```avg```.
+    - Add new assignment_id and its percentage to ```learner_info```.
+    - Demonstrated the retrieval, manipulation, and removal of items in an array or properties in an object.
+5. Check the validation of the input data.
