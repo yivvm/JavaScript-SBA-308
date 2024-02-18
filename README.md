@@ -1,9 +1,10 @@
 # JavaScript-SBA-308
 
 Check my code in:
-- solution-1-v1.js: the first version of the solution 1.
-- solution-1-v2.js: the simplified version of the solution 1.
-- solution-2.js: another solution.
+- ```solution-1-v1.js```: the first version of the solution 1.
+- ```solution-1-v2.js```: the simplified version of the solution 1.
+- ```solution-2-v1.js```: another solution.
+- ```solution-2-v2.js```: the simplified version of the solution 2.
 
 ## solution-1-v1.js
 For this solution, there's no need to find the existing data for the learners, add the score to the existing data, nor remove the extra data.
@@ -57,7 +58,7 @@ It returns the same ```results``` as the ```solution-1-v1.js```.
 Tested ```try/catch```:  
 ![trycatch](./trycatch.png)
 
-## solution-2.js
+## solution-2-v1.js
 Update the results for each assignment submission.
 1. Check if an assignment is not yet due, do not include it in the results.   
     - Utilized at least one loop control keyword such as break or continue.
@@ -71,4 +72,4 @@ Update the results for each assignment submission.
     - Update the ```avg```.
     - Add new assignment_id and its percentage to ```learner_info```.
     - Demonstrated the retrieval, manipulation, and removal of items in an array or properties in an object.
-5. Check the validation of the input data.
+5. Check the validation of the input data, the same as ```solution-1-v1.js``` and ```solution-1-v2.js``` (see above).

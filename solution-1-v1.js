@@ -76,12 +76,11 @@ const LearnerSubmissions = [
   },
 ];
 
-
 function getLearnerData(course, ag, submissions) {
   const results = [];
 
   // done: Parse submission data.
-    // console.log(`Submission Data:`, submissions );
+  // console.log(`Submission Data:`, submissions );
   // done: Check to see if the submission was late; if so, deduct 10% of the maximum possible points.
   // Find existing data for this learner, if any.
   // If the learner already has data, add the new score to the existing data.
@@ -121,7 +120,7 @@ function getLearnerData(course, ag, submissions) {
     const all_submits = learners[id];
 
     // for final output and the format: the ID of the learner for which this data has been collected
-    let learner_info = { 'id': Number(id) };
+    let learner_info = { id: Number(id) };
     // const learner_info = new Map();
     // learner_info.set( 'id', id);
 
@@ -134,14 +133,14 @@ function getLearnerData(course, ag, submissions) {
       // console.log(assignment)
 
       // if an assignment is not yet due, do not include it in the results
-      if (assignment.due_at < '2024-02-16') {
+      if (assignment.due_at < "2024-02-16") {
         let actual_score = submit[2];
-        
+
         // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
         if (submit[1] > assignment.due_at) {
           actual_score -= assignment.points_possible * 0.1;
-        } 
-        
+        }
+
         sum_score += actual_score;
         sum_total += assignment.points_possible;
         avg = sum_score / sum_total;
@@ -151,13 +150,13 @@ function getLearnerData(course, ag, submissions) {
         // learner_info.set('avg', avg);
 
         // for final output and the format: each assignment: submission.score / points_possible
-        learner_info[Number(submit[0])] = Number((
-          actual_score / assignment.points_possible
-        ).toFixed(3));
+        learner_info[Number(submit[0])] = Number(
+          (actual_score / assignment.points_possible).toFixed(3)
+        );
         // console.log(typeof submit[0]);
       }
     }
-    
+
     // console.log(sum_score, sum_total, avg);
     // console.log(learner_info);
     // console.log(`id's type: ${typeof(Number(id))}`, `avg's type: ${typeof(learner_info.avg)}`);
@@ -169,24 +168,25 @@ function getLearnerData(course, ag, submissions) {
   return results;
 }
 
-
 // 5. check the validation of the input data
 function validateAssignmentGroup(course, ag, submissions) {
   // if an AssignmentGroup does not belong to its course, throw an error.
   if (ag.course_id !== course.id) {
-    throw new Error("Error: the AssignmentGroup does not belong to its course.")
+    throw new Error(
+      "Error: the AssignmentGroup does not belong to its course."
+    );
   }
 
   // if points_possible is 0, throw an error.
   ag.assignments.forEach((assignment) => {
     if (assignment.points_possible === 0) {
-      throw new Error("Error: the points_possible cannot be 0.")
+      throw new Error("Error: the points_possible cannot be 0.");
     }
     // if a value is a string instead of a number, throw an error.
-    if (typeof(assignment.points_possible) === 'string') {
-      throw new Error("Error: the points_possible should be a number.")
-    } 
-  })
+    if (typeof assignment.points_possible === "string") {
+      throw new Error("Error: the points_possible should be a number.");
+    }
+  });
 
   // if a value is a string instead of a number, throw an error.
   // for (let i = 0; i < submissions.length; i++) {
@@ -195,29 +195,30 @@ function validateAssignmentGroup(course, ag, submissions) {
   //   }
   // }
   submissions.forEach((submit) => {
-    if (typeof(submit.submission.score) === 'string') {
-      throw new Error("Error: the score should be a number.")
+    if (typeof submit.submission.score === "string") {
+      throw new Error("Error: the score should be a number.");
     }
-  })
+  });
 }
 
 try {
   validateAssignmentGroup(CourseInfo, AssignmentGroup, LearnerSubmissions);
-  const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+  const result = getLearnerData(
+    CourseInfo,
+    AssignmentGroup,
+    LearnerSubmissions
+  );
   console.log(result);
 } catch (error) {
   console.log(error.message);
   return null;
 }
 
-
 // --- for testing----------------------
 // for (let i = 0; i < LearnerSubmissions.length; i++)  {
 //   console.log(typeof(LearnerSubmissions[i].submission.score))
-  
+
 // }
-
-
 
 // --- FYI ----------------
 // const example_result = [
