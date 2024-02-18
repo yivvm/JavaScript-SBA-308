@@ -1,6 +1,6 @@
 # JavaScript-SBA-308
 
-check my code in:
+Check my code in:
 - solution-1-v1.js: the first version of the solution 1.
 - solution-1-v2.js: the simplified version of the solution 1.
 - solution-2.js: another solution.
@@ -41,11 +41,7 @@ For learner id 132, the ```learner_info``` will be:
 5. check the validation of the input data.
 - If an AssignmentGroup does not belong to its course, throw an error.
 - If points_possible is 0, throw an error.
-- // If a value is a string instead of a number, throw an error.
+- If a value is a string instead of a number, throw an error.
+Also put the ```try/catch``` inside and at the beginning of the ```function getLearnerData```, it worked.  
+But in order for the readability, ```try/catch``` was decided to put outside the function.
 
-
-
-
-
-also put the try/catch inside and at the beginning of the function getLearnerData, it worked.
-but in order for the readability,try/catch was decided to put outside the function
