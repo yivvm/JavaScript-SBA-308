@@ -137,7 +137,6 @@ function getLearnerData(course, ag, submissions) {
     // 3. for final output and the format: append each learner's information to the results list as the final output
     results.push(learner_info);
   }
-
   return results;
 }
 
