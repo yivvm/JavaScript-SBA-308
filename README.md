@@ -52,7 +52,7 @@ But in order for the readability, ```try/catch``` was decided to put outside the
 This is the simplified version of solution 1.  
 Most of the steps were the same as solution-1-v1.js.
 Except that the version 2 does not create a list of learners' id.
-It returns the same ```results``` as the ```solution-1-v1.js```.
+It returns the same ```results``` as the ```solution-1-v1.js```.  
 ![results](./results.png)
-Tested ```try/catch```:
+Tested ```try/catch```:  
 ![trycatch](./trycatch.png)
