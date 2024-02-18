@@ -5,8 +5,8 @@ check my code in:
 - solution-1-v2.js: the simplified version of the solution 1.
 - solution-2.js: another solution.
 
-### solution-1-v1.js & solution-1-v2.js:
-
+## solution-1-v1.js & solution-1-v2.js:
+1. create a list of learners with a list of submission information. ```learners```:
 
 
 
