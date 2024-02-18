@@ -112,12 +112,13 @@ function getLearnerData(course, ag, submissions) {
   // for each learner, create the result list of objects in the format as requested: {id:'123', avg:0.98, 1:0.98, 2:1.0}
   for (const learner_id in learners) {
     const all_submits = learners[learner_id];
-    let learner_info = { 'id': id };
+    let learner_info = { 'id': learner_id };
     let sum_score = 0;
     let sum_total = 0;
 
     all_submits.forEach((submit) => {
       const assignment = ag.assignments.find((a) => a.id === submit[0]);
+
       // if an assignment is not yet due, do not include it in the results
       if (assignment.due_at < '2024-02-16') {
         let actual_score = submit[2];
@@ -132,7 +133,7 @@ function getLearnerData(course, ag, submissions) {
       }
     });
 
-    learner_id.avg = (sum_score / sum_total).toFixed(3);
+    learner_info.avg = (sum_score / sum_total).toFixed(3);
 
     // 3. for final output and the format: append each learner's information to the results list as the final output
     results.push(learner_info);

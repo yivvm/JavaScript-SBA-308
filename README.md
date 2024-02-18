@@ -5,7 +5,7 @@ Check my code in:
 - solution-1-v2.js: the simplified version of the solution 1.
 - solution-2.js: another solution.
 
-## solution-1-v1.js & solution-1-v2.js:
+## solution-1-v1.js
 For this solution, there's no need to find the existing data for the learners, add the score to the existing data, nor remove the extra data.
 1. Create a list of ```learners``` with a list of submission information. ```learners``` will be:
 ```
@@ -47,3 +47,9 @@ For learner id 132, the ```learner_info``` will be:
 Also put the ```try/catch``` inside and at the beginning of the ```function getLearnerData```, it worked.  
 But in order for the readability, ```try/catch``` was decided to put outside the function.
 
+## solution-1-v2.js
+This is the simplified version of solution 1.  
+Most of the steps were the same as solution-1-v1.js.
+Except that the version 2 does not create a list of learners' id.
+It returns the same ```results``` as the ```solution-1-v1.js```.
+![results](./results.png)
