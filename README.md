@@ -22,7 +22,7 @@ For this solution, there's no need to find the existing data for the learners, a
 ```
 [ '125', '132' ]
 ```
-3. For each learner, create the result list of objects in the format as requested: {id:'123', avg:0.98, 1:0.98, 2:1.0}, which will be stored in ```learner_info```.
+3. For each learner, create the result list of objects in the format as requested: {id:'123', avg:0.98, 1:0.98, 2:1.0}, which will be stored in ```learner_info```.  
 For learner id 125, the ```learner_info``` will be:
 ```
 { '1': '0.940', '2': '1.000', id: '125', avg: '0.985' }
