@@ -106,85 +106,87 @@ function getLearnerData(course, ag, submissions) {
         // 3. if there's no existing data:
         if (!learner_info) {
           learner_info = {
-              id: submit.learner_id,
-              avg: Number((submit.submission.score / assignment.points_possible).toFixed(3)) // Initialize the average
+              id: submit.learner_id
           };
-          learner_info[assignment.id] = Number((submit.submission.score / assignment.points_possible).toFixed(3));
 
-          console.log(learner_info);
+         // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
+          if (submit.submission.submitted_at > assignment.due_at) {
+            actual_score = submit.submission.score - assignment.points_possible * 0.1;
+          }
+
+          learner_info['avg'] = Number((actual_score / assignment.points_possible).toFixed(3)); // Initialize the average
+          learner_info[Number(assignment.id)] = Number((actual_score / assignment.points_possible).toFixed(3));
+
+          // console.log(learner_info);
           results.push(learner_info);
         }
         
         // 4. if there's existing data:
+        else {
+          // console.log(learner_info)
+          // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
+          if (submit.submission.submitted_at > assignment.due_at) {
+          actual_score = submit.submission.score - assignment.points_possible * 0.1;
+          } 
+
+          let sum_score = actual_score;
+          let sum_total = assignment.points_possible;
+
+          // update the avg
+          for (const key in learner_info) {
+            const prev_assignment = ag.assignments.find((a) => a.id === Number(key));
+            if (prev_assignment) {
+              sum_score += learner_info[key] * prev_assignment.points_possible;
+              sum_total += prev_assignment.points_possible;
+            }
+          }
+          learner_info['avg'] = Number((sum_score / sum_total).toFixed(3));
+
+          // add new assignment_id and its weight to learner_info
+          learner_info[Number(assignment.id)] = Number((actual_score / assignment.points_possible).toFixed(3));
+
+          // console.log(learner_info)
+        }
       } 
   })
-
-  // // for each learner, create the result list of objects in the format as requested: {id:'123', avg:0.98, 1:0.98, 2:1.0}
-  // for (const learner_id in learners) {
-  //   const all_submits = learners[learner_id];
-  //   let learner_info = { 'id': Number(learner_id) };
-  //   let sum_score = 0;
-  //   let sum_total = 0;
-
-  //   all_submits.forEach((submit) => {
-  //     const assignment = ag.assignments.find((a) => a.id === submit[0]);
-
-  //     // if an assignment is not yet due, do not include it in the results
-  //     if (assignment.due_at < '2024-02-16') {
-  //       let actual_score = submit[2];
-        
-  //       // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
-  //       if (submit[1] > assignment.due_at) {
-  //         actual_score -= assignment.points_possible * 0.1;
-  //       } 
-  //       sum_score += actual_score;
-  //       sum_total += assignment.points_possible;
-  //       learner_info[Number(submit[0])] = Number((actual_score / assignment.points_possible).toFixed(3))
-  //     }
-  //   });
-
-  //   learner_info.avg = Number((sum_score / sum_total).toFixed(3));
-
-  //   // 3. for final output and the format: append each learner's information to the results list as the final output
-  //   results.push(learner_info);
-  // }
-  // return results;
+  
+  return results;
 }
 
 // 4. check the validation of the input data
-// function validateAssignmentGroup(course, ag, submissions) {
-//   // if an AssignmentGroup does not belong to its course, throw an error.
-//   if (ag.course_id !== course.id) {
-//     throw new Error("Error: the AssignmentGroup does not belong to its course.")
-//   }
+function validateAssignmentGroup(course, ag, submissions) {
+  // if an AssignmentGroup does not belong to its course, throw an error.
+  if (ag.course_id !== course.id) {
+    throw new Error("Error: the AssignmentGroup does not belong to its course.")
+  }
 
-//   // if points_possible is 0, throw an error.
-//   ag.assignments.forEach((assignment) => {
-//     if (assignment.points_possible === 0) {
-//       throw new Error("Error: the points_possible cannot be 0.")
-//     }
-//     // if a value is a string instead of a number, throw an error.
-//     if (typeof(assignment.points_possible) === 'string') {
-//       throw new Error("Error: the points_possible should be a number.")
-//     } 
-//   })
+  // if points_possible is 0, throw an error.
+  ag.assignments.forEach((assignment) => {
+    if (assignment.points_possible === 0) {
+      throw new Error("Error: the points_possible cannot be 0.")
+    }
+    // if a value is a string instead of a number, throw an error.
+    if (typeof(assignment.points_possible) === 'string') {
+      throw new Error("Error: the points_possible should be a number.")
+    } 
+  })
 
-//   // if a value is a string instead of a number, throw an error.
-//   submissions.forEach((submit) => {
-//     if (typeof(submit.submission.score) === 'string') {
-//       throw new Error("Error: the score should be a number.")
-//     }
-//   })
-// }
+  // if a value is a string instead of a number, throw an error.
+  submissions.forEach((submit) => {
+    if (typeof(submit.submission.score) === 'string') {
+      throw new Error("Error: the score should be a number.")
+    }
+  })
+}
 
-// try {
-//   validateAssignmentGroup(CourseInfo, AssignmentGroup, LearnerSubmissions);
+try {
+  validateAssignmentGroup(CourseInfo, AssignmentGroup, LearnerSubmissions);
   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   console.log(result);
-// } catch (error) {
-//   console.log(error.message);
-//   return null;
-// }
+} catch (error) {
+  console.log(error.message);
+  return null;
+}
 
 
 // --- for testing----------------------
