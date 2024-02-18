@@ -27,17 +27,18 @@ For this solution, there's no need to find the existing data for the learners, a
 - Checked if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment.   
 For learner id 125, the ```learner_info``` will be:
 ```
-{ '1': '0.940', '2': '1.000', id: '125', avg: '0.985' }
+{ '1': 0.94, '2': 1, id: 125, avg: 0.985 }
 ```
 For learner id 132, the ```learner_info``` will be:
 ```
-{ '1': '0.780', '2': '0.833', id: '132', avg: '0.820' }
+{ '1': 0.78, '2': 0.833, id: 132, avg: 0.82 }
 ```
+Note: The assignment_id (e.g. ```'1'```) is represented as a string in the output. This is just a representation issue in the console, and the keys are indeed stored as numbers in the object.
 4. Append each learner's information to the results list as the final output. ```results``` will be:
 ```
 [
-  { '1': '0.940', '2': '1.000', id: '125', avg: '0.985' },
-  { '1': '0.780', '2': '0.833', id: '132', avg: '0.820' }
+  { '1': 0.94, '2': 1, id: 125, avg: 0.985 },
+  { '1': 0.78, '2': 0.833, id: 132, avg: 0.82 }
 ]
 ```
 5. check the validation of the input data.

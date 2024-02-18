@@ -121,7 +121,7 @@ function getLearnerData(course, ag, submissions) {
     const all_submits = learners[id];
 
     // for final output and the format: the ID of the learner for which this data has been collected
-    let learner_info = { 'id': id };
+    let learner_info = { 'id': Number(id) };
     // const learner_info = new Map();
     // learner_info.set( 'id', id);
 
@@ -147,18 +147,20 @@ function getLearnerData(course, ag, submissions) {
         avg = sum_score / sum_total;
         avg = avg.toFixed(3); // to have exactly three decimal digits
         // for final output and the format: the learner's weighted average score
-        learner_info["avg"] = avg;
+        learner_info["avg"] = Number(avg);
         // learner_info.set('avg', avg);
 
         // for final output and the format: each assignment: submission.score / points_possible
-        learner_info[submit[0]] = (
+        learner_info[Number(submit[0])] = Number((
           actual_score / assignment.points_possible
-        ).toFixed(3);
+        ).toFixed(3));
+        // console.log(typeof submit[0]);
       }
     }
     
     // console.log(sum_score, sum_total, avg);
     // console.log(learner_info);
+    // console.log(`id's type: ${typeof(Number(id))}`, `avg's type: ${typeof(learner_info.avg)}`);
 
     // 4. for final output and the format: append each learner's information to the results list as the final output
     results.push(learner_info);

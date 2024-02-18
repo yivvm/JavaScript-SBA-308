@@ -109,10 +109,12 @@ function getLearnerData(course, ag, submissions) {
     }
   });
 
+  // console.log(learners);
+
   // for each learner, create the result list of objects in the format as requested: {id:'123', avg:0.98, 1:0.98, 2:1.0}
   for (const learner_id in learners) {
     const all_submits = learners[learner_id];
-    let learner_info = { 'id': learner_id };
+    let learner_info = { 'id': Number(learner_id) };
     let sum_score = 0;
     let sum_total = 0;
 
@@ -129,11 +131,11 @@ function getLearnerData(course, ag, submissions) {
         } 
         sum_score += actual_score;
         sum_total += assignment.points_possible;
-        learner_info[submit[0]] = (actual_score / assignment.points_possible).toFixed(3)
+        learner_info[Number(submit[0])] = Number((actual_score / assignment.points_possible).toFixed(3))
       }
     });
 
-    learner_info.avg = (sum_score / sum_total).toFixed(3);
+    learner_info.avg = Number((sum_score / sum_total).toFixed(3));
 
     // 3. for final output and the format: append each learner's information to the results list as the final output
     results.push(learner_info);
