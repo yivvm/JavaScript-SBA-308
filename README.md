@@ -33,7 +33,7 @@ For learner id 132, the ```learner_info``` will be:
 ```
 { '1': 0.78, '2': 0.833, id: 132, avg: 0.82 }
 ```
-Note: The assignment_id (e.g. ```'1'```) is represented as a string in the output. This is just a representation issue in the console, and the keys are indeed stored as numbers in the object.
+Note: The assignment_id (e.g. ```'1'```) is represented as a string in the output. This is just a representation issue in the console, and the keys are indeed stored as numbers in the object.  
 4. Append each learner's information to the results list as the final output. ```results``` will be:
 ```
 [
