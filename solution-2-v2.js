@@ -99,62 +99,42 @@ function getLearnerData(course, ag, submissions) {
 
       // 2. check if there's any existing data for this learner
       let learner_info = results.find((l) => l.id === submit.learner_id);
-      // console.log(learner_info)
 
       // 3. if there's no existing data:
       if (!learner_info) {
         learner_info = {
           id: submit.learner_id,
         };
-
-        // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
-        if (submit.submission.submitted_at > assignment.due_at) {
-          actual_score =
-            submit.submission.score - assignment.points_possible * 0.1;
-        }
-
-        learner_info["avg"] = Number(
-          (actual_score / assignment.points_possible).toFixed(3)
-        ); // Initialize the average
-        learner_info[Number(assignment.id)] = Number(
-          (actual_score / assignment.points_possible).toFixed(3)
-        );
-
-        // console.log(learner_info);
+        
         results.push(learner_info);
       }
 
       // 4. if there's existing data:
-      else {
-        // console.log(learner_info)
-        // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
-        if (submit.submission.submitted_at > assignment.due_at) {
-          actual_score =
-            submit.submission.score - assignment.points_possible * 0.1;
-        }
-
-        let sum_score = actual_score;
-        let sum_total = assignment.points_possible;
-
-        // update the avg, and remove the previous avg
-        for (const key in learner_info) {
-          const prev_assignment = ag.assignments.find(
-            (a) => a.id === Number(key)
-          );
-          if (prev_assignment) {
-            sum_score += learner_info[key] * prev_assignment.points_possible;
-            sum_total += prev_assignment.points_possible;
-          }
-        }
-        learner_info["avg"] = Number((sum_score / sum_total).toFixed(3));
-
-        // add new assignment_id and its percentage to learner_info
-        learner_info[Number(assignment.id)] = Number(
-          (actual_score / assignment.points_possible).toFixed(3)
-        );
-
-        // console.log(learner_info)
+      // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
+      if (submit.submission.submitted_at > assignment.due_at) {
+        actual_score =
+          submit.submission.score - assignment.points_possible * 0.1;
       }
+
+      let sum_score = actual_score;
+      let sum_total = assignment.points_possible;
+
+      // update the avg, and remove the previous avg, if there's any previous assignment submission
+      for (const key in learner_info) {
+        const prev_assignment = ag.assignments.find(
+          (a) => a.id === Number(key)
+        );
+        if (prev_assignment) {
+          sum_score += learner_info[key] * prev_assignment.points_possible;
+          sum_total += prev_assignment.points_possible;
+        }
+      }
+      learner_info["avg"] = Number((sum_score / sum_total).toFixed(3));
+
+      // add new assignment_id and its percentage to learner_info
+      learner_info[Number(assignment.id)] = Number(
+        (actual_score / assignment.points_possible).toFixed(3)
+      );
     }
   });
 
