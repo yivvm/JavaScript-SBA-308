@@ -81,7 +81,7 @@ function getLearnerData(course, ag, submissions) {
   const results = [];
 
   // done: Parse submission data.
-    console.log(`Submission Data:`, submissions );
+    // console.log(`Submission Data:`, submissions );
   // done: Check to see if the submission was late; if so, deduct 10% of the maximum possible points.
   // Find existing data for this learner, if any.
   // If the learner already has data, add the new score to the existing data.
@@ -109,7 +109,7 @@ function getLearnerData(course, ag, submissions) {
     }
   });
 
-  // console.log(learners);
+  console.log(learners);
 
   // 2. create a list of learners' id
   const learners_id = Object.keys(learners);
