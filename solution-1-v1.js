@@ -109,7 +109,7 @@ function getLearnerData(course, ag, submissions) {
     }
   });
 
-  console.log(learners);
+  // console.log(learners);
 
   // 2. create a list of learners' id
   const learners_id = Object.keys(learners);
@@ -160,7 +160,7 @@ function getLearnerData(course, ag, submissions) {
     // console.log(sum_score, sum_total, avg);
     // console.log(learner_info);
 
-    // for final output and the format: append each learner's information to the results list as the final output
+    // 4. for final output and the format: append each learner's information to the results list as the final output
     results.push(learner_info);
   });
 

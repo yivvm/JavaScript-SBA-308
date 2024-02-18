@@ -7,7 +7,7 @@ check my code in:
 
 ## solution-1-v1.js & solution-1-v2.js:
 For this solution, there's no need to find the existing data for the learners, add the score to the existing data, nor remove the extra data.
-1. create a list of ```learners``` with a list of submission information. ```learners``` will be:
+1. Create a list of ```learners``` with a list of submission information. ```learners``` will be:
 ```
 {
   '125': [
@@ -18,6 +18,28 @@ For this solution, there's no need to find the existing data for the learners, a
   '132': [ [ 1, '2023-01-24', 39 ], [ 2, '2023-03-07', 140 ] ]
 }
 ```
+2. Create a list of learners' id. ```learners_id``` will be:
+```
+[ '125', '132' ]
+```
+3. For each learner, create the result list of objects in the format as requested: {id:'123', avg:0.98, 1:0.98, 2:1.0}, which will be stored in ```learner_info```.
+For learner id 125, the ```learner_info``` will be:
+```
+{ '1': '0.940', '2': '1.000', id: '125', avg: '0.985' }
+```
+For learner id 132, the ```learner_info``` will be:
+```
+{ '1': '0.780', '2': '0.833', id: '132', avg: '0.820' }
+```
+4. Append each learner's information to the results list as the final output. ```results``` will be:
+```
+[
+  { '1': '0.940', '2': '1.000', id: '125', avg: '0.985' },
+  { '1': '0.780', '2': '0.833', id: '132', avg: '0.820' }
+]
+```
+
+
 
 
 
