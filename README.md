@@ -38,7 +38,10 @@ For learner id 132, the ```learner_info``` will be:
   { '1': '0.780', '2': '0.833', id: '132', avg: '0.820' }
 ]
 ```
-
+5. check the validation of the input data.
+- If an AssignmentGroup does not belong to its course, throw an error.
+- If points_possible is 0, throw an error.
+- // If a value is a string instead of a number, throw an error.
 
 
 

@@ -168,7 +168,7 @@ function getLearnerData(course, ag, submissions) {
 }
 
 
-// check the validation of the input data
+// 5. check the validation of the input data
 function validateAssignmentGroup(course, ag, submissions) {
   // if an AssignmentGroup does not belong to its course, throw an error.
   if (ag.course_id !== course.id) {
