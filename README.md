@@ -8,7 +8,8 @@ check my code in:
 ## solution-1-v1.js & solution-1-v2.js:
 For this solution, there's no need to find the existing data for the learners, add the score to the existing data, nor remove the extra data.
 1. create a list of ```learners``` with a list of submission information. ```learners``` will be:
-```{
+```
+{
   '125': [
     [ 1, '2023-01-25', 47 ],
     [ 2, '2023-02-12', 150 ],
