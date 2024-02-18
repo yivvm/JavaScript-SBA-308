@@ -54,3 +54,5 @@ Most of the steps were the same as solution-1-v1.js.
 Except that the version 2 does not create a list of learners' id.
 It returns the same ```results``` as the ```solution-1-v1.js```.
 ![results](./results.png)
+Tested ```try/catch```:
+![trycatch](./trycatch.png)
