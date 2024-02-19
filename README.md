@@ -73,3 +73,8 @@ Update the results for each assignment submission.
     - Add new assignment_id and its percentage to ```learner_info```.
     - Demonstrated the retrieval, manipulation, and removal of items in an array or properties in an object.
 5. Check the validation of the input data, the same as ```solution-1-v1.js``` and ```solution-1-v2.js``` (see above).
+
+## solution-2-v2.js
+This is the simplified version of solution 2.  
+
+
