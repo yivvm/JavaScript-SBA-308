@@ -94,7 +94,9 @@ function getLearnerData(course, ag, submissions) {
     );
 
     // 1. if an assignment is not yet due, do not include it in the results
-    if (new Date(assignment.due_at) < new Date()) {
+    if (new Date(assignment.due_at) > new Date()) {
+        return;
+    } else {
       let actual_score = submit.submission.score;
 
       // 2. check if there's any existing data for this learner
@@ -124,13 +126,17 @@ function getLearnerData(course, ag, submissions) {
         const prev_assignment = ag.assignments.find(
           (a) => a.id === Number(key)
         );
-        if (prev_assignment) {
+        if (!prev_assignment) {
+            break;
+        } else {
           sum_score += learner_info[key] * prev_assignment.points_possible;
           sum_total += prev_assignment.points_possible;
         }
       }
       learner_info["avg"] = Number((sum_score / sum_total).toFixed(3));
 
+      // remove items from objects
+      delete learner_info[assignment.id];  // is not necessary
       // add new assignment_id and its percentage to learner_info
       learner_info[Number(assignment.id)] = Number(
         (actual_score / assignment.points_possible).toFixed(3)
