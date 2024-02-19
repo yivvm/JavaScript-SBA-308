@@ -76,5 +76,5 @@ Update the results for each assignment submission.
 
 ## solution-2-v2.js
 This is the simplified version of solution 2.  
-    - Update the utilization of the loop control keywork ```return``` and ```break```.
+    - Update the utilization of the loop control keywork ```return``` and ```break```.  
     - Update the removal of items from objects as needed.
