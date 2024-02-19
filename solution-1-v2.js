@@ -121,11 +121,11 @@ function getLearnerData(course, ag, submissions) {
       const assignment = ag.assignments.find((a) => a.id === submit[0]);
 
       // if an assignment is not yet due, do not include it in the results
-      if (assignment.due_at < "2024-02-16") {
+      if (new Date(assignment.due_at) < new Date()) {
         let actual_score = submit[2];
 
         // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
-        if (submit[1] > assignment.due_at) {
+        if (new Date(submit[1]) > new Date(assignment.due_at)) {
           actual_score -= assignment.points_possible * 0.1;
         }
         sum_score += actual_score;

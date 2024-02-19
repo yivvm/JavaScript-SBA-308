@@ -94,7 +94,7 @@ function getLearnerData(course, ag, submissions) {
     );
 
     // 1. if an assignment is not yet due, do not include it in the results
-    if (assignment.due_at < "2024-02-16") {
+    if (new Date(assignment.due_at) < new Date()) {
       let actual_score = submit.submission.score;
 
       // 2. check if there's any existing data for this learner
@@ -111,7 +111,7 @@ function getLearnerData(course, ag, submissions) {
 
       // 4. if there's existing data:
       // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
-      if (submit.submission.submitted_at > assignment.due_at) {
+      if (new Date(submit.submission.submitted_at) > new Date(assignment.due_at)) {
         actual_score =
           submit.submission.score - assignment.points_possible * 0.1;
       }

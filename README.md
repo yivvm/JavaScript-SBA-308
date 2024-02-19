@@ -76,5 +76,3 @@ Update the results for each assignment submission.
 
 ## solution-2-v2.js
 This is the simplified version of solution 2.  
-
-
