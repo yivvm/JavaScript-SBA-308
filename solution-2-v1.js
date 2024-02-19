@@ -111,7 +111,9 @@ function getLearnerData(course, ag, submissions) {
         };
 
         // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
-        if (new Date(submit.submission.submitted_at) > new Date(assignment.due_at)) {
+        if (
+          new Date(submit.submission.submitted_at) > new Date(assignment.due_at)
+        ) {
           actual_score =
             submit.submission.score - assignment.points_possible * 0.1;
         }

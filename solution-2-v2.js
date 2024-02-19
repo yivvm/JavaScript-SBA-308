@@ -95,7 +95,7 @@ function getLearnerData(course, ag, submissions) {
 
     // 1. if an assignment is not yet due, do not include it in the results
     if (new Date(assignment.due_at) > new Date()) {
-        return;
+      return;
     } else {
       let actual_score = submit.submission.score;
 
@@ -107,13 +107,15 @@ function getLearnerData(course, ag, submissions) {
         learner_info = {
           id: submit.learner_id,
         };
-        
+
         results.push(learner_info);
       }
 
       // 4. if there's existing data:
       // if the learner's submission is late, deduct 10% of the total points_possible from their score of that assignment
-      if (new Date(submit.submission.submitted_at) > new Date(assignment.due_at)) {
+      if (
+        new Date(submit.submission.submitted_at) > new Date(assignment.due_at)
+      ) {
         actual_score =
           submit.submission.score - assignment.points_possible * 0.1;
       }
@@ -127,7 +129,7 @@ function getLearnerData(course, ag, submissions) {
           (a) => a.id === Number(key)
         );
         if (!prev_assignment) {
-            break;
+          break;
         } else {
           sum_score += learner_info[key] * prev_assignment.points_possible;
           sum_total += prev_assignment.points_possible;
@@ -136,7 +138,7 @@ function getLearnerData(course, ag, submissions) {
       learner_info["avg"] = Number((sum_score / sum_total).toFixed(3));
 
       // remove items from objects
-      delete learner_info[assignment.id];  // is not necessary
+      delete learner_info[assignment.id]; // is not necessary
       // add new assignment_id and its percentage to learner_info
       learner_info[Number(assignment.id)] = Number(
         (actual_score / assignment.points_possible).toFixed(3)
