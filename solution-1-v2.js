@@ -182,14 +182,9 @@ try {
   console.log(result);
 } catch (error) {
   console.log(error.message);
-  return null;
 }
 
-// --- for testing----------------------
-// for (let i = 0; i < LearnerSubmissions.length; i++)  {
-//   console.log(typeof(LearnerSubmissions[i].submission.score))
 
-// }
 
 // --- FYI ----------------
 // const example_result = [
