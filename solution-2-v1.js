@@ -181,21 +181,21 @@ function validateAssignmentSubmisstion(course, ag, submissions) {
       throw new Error("Error: the points_possible cannot be 0.");
     }
     // if a value is a string instead of a number, throw an error.
-    if (typeof assignment.points_possible === "string") {
+    if (typeof(assignment.points_possible) !== "number" || isNaN(assignment.points_possible)) {
       throw new Error("Error: the points_possible should be a number.");
     }
   });
 
   // if a value is a string instead of a number, throw an error.
   submissions.forEach((submit) => {
-    if (typeof submit.submission.score === "string") {
+    if (typeof(submit.submission.score) !== "number" || isNaN(submit.submission.score)) {
       throw new Error("Error: the score should be a number.");
     }
   });
 }
 
 try {
-  validateAssignmentGroup(CourseInfo, AssignmentGroup, LearnerSubmissions);
+  validateAssignmentSubmisstion(CourseInfo, AssignmentGroup, LearnerSubmissions);
   const result = getLearnerData(
     CourseInfo,
     AssignmentGroup,
